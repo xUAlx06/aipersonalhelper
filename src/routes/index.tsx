@@ -1,24 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { FlowDeskApp } from "@/components/flowdesk-app";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "FlowDesk — AI Productivity Workspace" },
+      { name: "description", content: "Write emails, prioritize tasks, and turn research into clear next steps with FlowDesk." },
+      { property: "og:title", content: "FlowDesk — AI Productivity Workspace" },
+      { property: "og:description", content: "A focused AI workspace for communication, planning, and research." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: FlowDeskApp,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
