@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import {
   ArrowRight,
+  CalendarDays,
   Check,
   ChevronDown,
   Clipboard,
@@ -183,10 +184,48 @@ function ToolLayout({ title, subtitle, icon: Icon, input, output }: { title: str
 }
 
 function HomeView({ onSelect }: { onSelect: (view: View) => void }) {
-  return <div className="animate-rise"><div className="max-w-2xl"><p className="text-xs font-semibold uppercase tracking-widest text-primary">Your workspace</p><h1 className="mt-3 font-display text-3xl font-semibold text-foreground sm:text-4xl">Good morning, Usaid.</h1><p className="mt-3 text-base leading-7 text-muted-foreground">Move from a blank page to clear, useful work in minutes.</p></div><div className="mt-9 grid gap-4 md:grid-cols-3">{(["email", "planner", "research"] as const).map((id, index) => { const item = toolCopy[id]; const Icon = item.icon; return <button key={id} onClick={() => onSelect(id)} className="group rounded-lg border border-border bg-card p-5 text-left shadow-panel transition hover:-translate-y-0.5 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><div className="flex items-start justify-between"><span className="grid size-10 place-items-center rounded-md bg-secondary text-primary"><Icon className="size-5" /></span><ArrowRight className="size-4 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" /></div><h2 className="mt-6 font-display text-lg font-semibold text-card-foreground">{item.title}</h2><p className="mt-2 min-h-10 text-sm leading-5 text-muted-foreground">{item.subtitle}</p><div className="mt-5 flex items-center gap-2 border-t border-border pt-4 text-xs text-muted-foreground"><Clock3 className="size-3.5" />{item.time}<span className="ml-auto">0{index + 1}</span></div></button>; })}</div><section className="mt-5 grid gap-5 rounded-lg border border-border bg-card p-5 shadow-panel md:grid-cols-[1.4fr_1fr] md:p-7"><div><p className="text-xs font-semibold uppercase tracking-widest text-primary">A better way to start</p><h2 className="mt-3 font-display text-2xl font-semibold text-card-foreground">Focus on decisions, not first drafts.</h2><p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">FlowDesk gives you a thoughtful starting point for communication, planning, and research—while keeping you in control of the final result.</p></div><div className="grid grid-cols-2 gap-3"><Metric value="3" label="AI workflows" /><Metric value="24/7" label="Ready when you are" /></div></section></div>;
+  const activity = [
+    { title: "Project follow-up email", meta: "Email · 12 minutes ago", icon: Mail, view: "email" as const },
+    { title: "Friday priority plan", meta: "Planner · 48 minutes ago", icon: ListChecks, view: "planner" as const },
+    { title: "Remote work trends", meta: "Research · Yesterday", icon: FileSearch, view: "research" as const },
+  ];
+
+  return <div className="animate-rise">
+    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-end">
+      <div className="max-w-2xl"><p className="text-xs font-semibold uppercase tracking-widest text-primary">Dashboard</p><h1 className="mt-3 font-display text-3xl font-semibold text-foreground sm:text-4xl">Good morning, Usaid.</h1><p className="mt-3 text-base leading-7 text-muted-foreground">Here’s your workspace at a glance. What will you move forward today?</p></div>
+      <div className="flex items-center gap-3 rounded-md border border-border bg-card px-4 py-3"><CalendarDays className="size-5 text-primary" /><div><p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Today</p><p className="text-sm font-medium text-foreground">Friday, 25 September</p></div></div>
+    </div>
+
+    <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <Metric value="12" label="Drafts created" detail="3 this week" />
+      <Metric value="18" label="Tasks planned" detail="6 completed" />
+      <Metric value="7" label="Research briefs" detail="2 this week" />
+      <Metric value="4.2h" label="Time reclaimed" detail="Estimated" />
+    </div>
+
+    <div className="mt-5 grid gap-5 xl:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.75fr)]">
+      <section className="rounded-lg border border-border bg-card p-5 shadow-panel sm:p-6">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4"><div className="min-w-0"><p className="text-[11px] font-semibold uppercase tracking-widest text-primary">Quick start</p><h2 className="mt-2 font-display text-xl font-semibold text-card-foreground">Choose a workflow</h2></div><Zap className="size-5 shrink-0 text-primary" /></div>
+        <div className="mt-5 grid gap-3 md:grid-cols-3">{(["email", "planner", "research"] as const).map((id) => { const item = toolCopy[id]; const Icon = item.icon; return <button key={id} onClick={() => onSelect(id)} className="group rounded-md border border-border bg-muted/20 p-4 text-left transition hover:border-primary/60 hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><span className="grid size-9 place-items-center rounded-md bg-secondary text-primary"><Icon className="size-4" /></span><h3 className="mt-5 font-display text-sm font-semibold text-card-foreground">{item.title}</h3><div className="mt-4 flex items-center justify-between text-xs text-muted-foreground"><span>{item.time}</span><ArrowRight className="size-4 transition group-hover:translate-x-1 group-hover:text-primary" /></div></button>; })}</div>
+      </section>
+
+      <section className="rounded-lg border border-primary/25 bg-warning-muted p-5 shadow-panel sm:p-6">
+        <p className="text-[11px] font-semibold uppercase tracking-widest text-primary">Today’s focus</p><h2 className="mt-3 font-display text-xl font-semibold text-warning-muted-foreground">Protect your first 90 minutes.</h2><p className="mt-3 text-sm leading-6 text-muted-foreground">Start with the project proposal, then clear client replies before planning the rest of the week.</p>
+        <div className="mt-5 space-y-3"><FocusItem time="09:00" title="Project proposal" /><FocusItem time="10:30" title="Client email block" /><FocusItem time="11:15" title="Weekly planning" /></div>
+        <Button className="mt-5 w-full" onClick={() => onSelect("planner")}><ListChecks />Open task planner</Button>
+      </section>
+    </div>
+
+    <section className="mt-5 rounded-lg border border-border bg-card p-5 shadow-panel sm:p-6">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4"><div><p className="text-[11px] font-semibold uppercase tracking-widest text-primary">Recent activity</p><h2 className="mt-2 font-display text-xl font-semibold text-card-foreground">Pick up where you left off</h2></div><Clock3 className="size-5 text-muted-foreground" /></div>
+      <div className="mt-5 divide-y divide-border">{activity.map((item) => { const Icon = item.icon; return <button key={item.title} onClick={() => onSelect(item.view)} className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 py-4 text-left first:pt-0 last:pb-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><span className="grid size-9 shrink-0 place-items-center rounded-md bg-secondary text-primary"><Icon className="size-4" /></span><span className="min-w-0"><span className="block truncate text-sm font-medium text-foreground">{item.title}</span><span className="mt-1 block text-xs text-muted-foreground">{item.meta}</span></span><ArrowRight className="size-4 shrink-0 text-muted-foreground" /></button>; })}</div>
+    </section>
+  </div>;
 }
 
-function Metric({ value, label }: { value: string; label: string }) { return <div className="rounded-md bg-muted p-4"><p className="font-display text-2xl font-semibold text-primary">{value}</p><p className="mt-1 text-xs text-muted-foreground">{label}</p></div>; }
+function Metric({ value, label, detail }: { value: string; label: string; detail: string }) { return <div className="rounded-lg border border-border bg-card p-4 shadow-panel sm:p-5"><p className="font-display text-2xl font-semibold text-primary sm:text-3xl">{value}</p><p className="mt-2 text-sm font-medium text-foreground">{label}</p><p className="mt-1 text-xs text-muted-foreground">{detail}</p></div>; }
+
+function FocusItem({ time, title }: { time: string; title: string }) { return <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3"><span className="w-11 text-xs font-semibold text-primary">{time}</span><span className="truncate border-l border-primary/30 pl-3 text-sm text-warning-muted-foreground">{title}</span></div>; }
 
 export function FlowDeskApp() {
   const [view, setView] = useState<View>("home");
