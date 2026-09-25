@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import {
   ArrowRight,
+  CalendarDays,
   Check,
   ChevronDown,
   Clipboard,
