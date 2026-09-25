@@ -1,44 +1,64 @@
-# Ai Productivity Assistant
-
-Build a web app called FlowDesk — a professional AI-powered productivity dashboard with a black and yellow theme (black/charcoal backgrounds, yellow for buttons, accents, and active states; black text on yellow buttons for contrast).
-
-Layout: Sidebar navigation (collapses to a drawer on mobile) + top bar + main content area. Fully responsive for desktop and mobile.
-
-Include 3 AI features, each with a clear input section and output card:
-
-Smart Email Generator — inputs for recipient/context, purpose, and key points; a tone selector (Formal / Friendly / Persuasive); generates a full email with subject line, body, and sign-off. Include Copy and Regenerate buttons.
-
-AI Task Planner — input list of tasks (name, duration, deadline, priority); toggle for Daily/Weekly view; generates a prioritized schedule with brief reasoning for the order. Include Regenerate.
-
-AI Research Assistant — input a topic or pasted text; generates a Summary, Key Insights (bullets), and Recommendations (bullets). Include Copy and Regenerate.
-
-Use mock/simulated AI outputs with a short loading delay for now, structured so a real AI API call can be swapped in later.
-
-Also include:
-
-A dashboard home page with a card linking to each tool.
-
-A dismissible Responsible AI disclaimer banner ("AI-generated content may contain errors — please review before use") plus a short note on every output card.
-
-Clean, professional UI — minimal, premium feel, not flashy.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/c74596d4-a177-4184-bc51-2e85fe104465).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+# FlowDesk — AI-Powered Workplace Productivity Suite
+ 
+FlowDesk is a professional productivity web application that uses AI to automate common workplace tasks. It combines three core AI features into a single, cohesive dashboard so users can draft communications, plan their work, and digest information faster.
+ 
+## Overview
+ 
+Knowledge workers lose significant time on repetitive, low-creativity tasks — writing routine emails, planning their day, and reading/summarizing long documents. FlowDesk addresses this by giving users AI-assisted tools for each of these tasks in one clean, distraction-free interface.
+ 
+## Features
+ 
+### ✉️ Smart Email Generator
+- Generates professional, ready-to-send emails from a short description of context, purpose, and key points.
+- Supports three tones: **Formal**, **Friendly**, and **Persuasive**.
+- Copy, edit, and regenerate outputs without re-entering inputs.
+### 🗓️ AI Task Planner / Scheduler
+- Turns a list (or brain-dump) of tasks into a realistic **daily or weekly** schedule.
+- Prioritizes tasks based on urgency, deadlines, and importance.
+- Shows brief reasoning for how each task was scheduled.
+### 🔎 AI Research Assistant
+- Summarizes articles, documents, or open-ended topics.
+- Produces a clear **Summary**, **Key Insights**, and **Recommendations**.
+- Supports follow-up refinement for deeper exploration.
+## Tech & Design
+ 
+- **Theme:** Black and yellow — a high-contrast, professional look built for focus.
+- **Layout:** Dashboard with collapsible sidebar navigation, responsive across desktop and mobile.
+- **AI Layer:** Feature logic is isolated per tool so mock responses can be swapped for a live AI/LLM API with minimal changes.
+## Responsible AI
+ 
+FlowDesk treats all AI output as a **draft, not a final answer**:
+- A disclaimer is shown on first load and on every AI-generated output.
+- Users are advised not to paste confidential or personally identifiable information into the tools.
+- AI-generated emails, schedules, and summaries should always be reviewed by a human before being sent or acted on.
+## Project Structure
+ 
 ```
+/dashboard          → Overview page with links to each tool
+/email-generator     → Smart Email Generator tool
+/task-planner        → AI Task Planner / Scheduler tool
+/research-assistant   → AI Research Assistant tool
+/settings             → App settings + Responsible AI notes
+```
+ 
+## Getting Started
+ 
+1. Clone or open the project.
+2. Install dependencies (if applicable to your build environment).
+3. Run the app locally / preview in Lovable.dev.
+4. (Optional) Connect a live AI API endpoint to replace the mock response layer in each feature's service file.
+## Roadmap Ideas
+ 
+- Persist user history (past emails, schedules, summaries) with an account/database layer.
+- Add calendar integration for the Task Planner.
+- Add file upload support for the Research Assistant (PDF/DOCX summarization).
+- Add a light theme toggle alongside the default black-and-yellow theme.
+## Disclaimer
+ 
+This project was built as a productivity/demo application. AI-generated content may contain inaccuracies and should be reviewed before professional use.
+
+
+ ## Author
+ Usaid
+
+ Github: "https://aipersonalhelper.lovable.app/"
