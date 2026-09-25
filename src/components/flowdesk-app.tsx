@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from "react";
 import {
   ArrowRight,
-  CalendarDays,
   Check,
   ChevronDown,
   Clipboard,
@@ -14,7 +13,6 @@ import {
   Menu,
   Plus,
   RefreshCw,
-  Send,
   Sparkles,
   Trash2,
   X,
@@ -55,15 +53,14 @@ function Logo() {
   );
 }
 
-function Nav({ view, onSelect }: { view: View; onSelect: (view: View) => void }) {
+function Nav({ view, onSelect, closeOnSelect = false }: { view: View; onSelect: (view: View) => void; closeOnSelect?: boolean }) {
   return (
     <nav className="space-y-1" aria-label="Main navigation">
       {navItems.map((item) => {
         const Icon = item.icon;
         const active = view === item.id;
-        return (
-          <SheetClose asChild key={item.id}>
-            <Button
+        const button = (
+            <Button key={item.id}
               variant="ghost"
               onClick={() => onSelect(item.id)}
               className={cn("h-11 w-full justify-start px-3 text-muted-foreground", active && "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground")}
@@ -71,8 +68,8 @@ function Nav({ view, onSelect }: { view: View; onSelect: (view: View) => void })
               <Icon className="size-4" />
               {item.label}
             </Button>
-          </SheetClose>
         );
+        return closeOnSelect ? <SheetClose asChild key={item.id}>{button}</SheetClose> : button;
       })}
     </nav>
   );
@@ -100,7 +97,7 @@ function MobileNav({ view, onSelect }: { view: View; onSelect: (view: View) => v
       <SheetContent side="left" className="w-72 border-border bg-sidebar p-5">
         <SheetTitle className="sr-only">FlowDesk navigation</SheetTitle>
         <Logo />
-        <div className="mt-10"><Nav view={view} onSelect={onSelect} /></div>
+        <div className="mt-10"><Nav view={view} onSelect={onSelect} closeOnSelect /></div>
       </SheetContent>
     </Sheet>
   );
