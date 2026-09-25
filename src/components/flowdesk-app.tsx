@@ -82,8 +82,8 @@ function Sidebar({ view, onSelect }: { view: View; onSelect: (view: View) => voi
       <div className="mt-10"><p className="mb-3 px-3 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Workspace</p><Nav view={view} onSelect={onSelect} /></div>
       <div className="mt-auto border-t border-border pt-4">
         <div className="flex items-center gap-3 px-2 py-2">
-          <div className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-xs font-semibold text-secondary-foreground">UA</div>
-          <div className="min-w-0"><p className="truncate text-sm font-medium text-foreground">Usaid Alakhras</p><p className="text-xs text-muted-foreground">Personal workspace</p></div>
+          <div className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-secondary-foreground"><Zap className="size-4" /></div>
+          <div className="min-w-0"><p className="truncate text-sm font-medium text-foreground">Local workspace</p><p className="text-xs text-muted-foreground">No sign-in required</p></div>
         </div>
       </div>
     </aside>
